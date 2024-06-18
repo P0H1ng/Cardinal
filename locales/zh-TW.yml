@@ -1,0 +1,148 @@
+zh-TW:
+  general:
+    success: "成功"
+    error_payload: "請求體格式錯誤！"
+    error_query: "請求參數不正確！"
+    must_be_number: "參數 {{.key}} 必須為數位！"
+    post_repeat: "重複添加！"
+    not_begin: "比賽未開始"
+    server_error: "後端程式錯誤！"
+    invalid_token: "Token 無效"
+    no_auth: "未授權訪問"
+    not_found: "資源不存在"
+    method_not_allow: "請求方法不允許"
+    database_charset_error: "資料庫編碼格式錯誤。可能導致無法正確處理中文字元，請刪除並重新創建資料庫，設置編碼格式為 utf8mb4。示例：CREATE DATABASE  `cardinal` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+
+  bulletin:
+    post_error: "添加公告失敗！"
+    post_success: "添加公告成功！"
+    put_error: "修改公告失敗！"
+    put_success: "修改公告成功！"
+    delete_error: "刪除公告失敗！"
+    delete_success: "刪除公告成功！"
+    not_found: "公告不存在！"
+
+  challenge:
+    post_error: "添加題目失敗！"
+    post_success: "添加題目成功！"
+    put_error: "修改題目資訊失敗！"
+    put_success: "修改題目資訊成功！"
+    delete_error: "刪除題目失敗！"
+    delete_success: "刪除題目成功！"
+    not_found: "題目不存在！"
+    empty_command: "命令不能為空！"
+    repeat: "題目重複！"
+
+  check:
+    repeat: "重複 Check，已忽略"
+    not_visible: "題目未開題，CheckDown 失敗"
+
+  config:
+    load_success: "載入設定檔成功"
+    update_success: "更新設置成功！"
+
+  file:
+    select_picture: "請選擇圖片檔！"
+
+  flag:
+    wrong: "Flag 錯誤！"
+    submit_error: "提交失敗！"
+    submit_success: "提交成功！"
+    repeat: "請勿重複提交 Flag"
+    generate_success: "生成 Flag 成功！"
+
+  gamebox:
+    post_error: "添加靶機失敗！"
+    post_success: "添加靶機成功！"
+    put_error: "修改靶機資訊失敗！"
+    put_success: "修改靶機資訊成功！"
+    delete_error: "刪除靶機失敗！"
+    delete_success: "刪除靶機成功！"
+    visibility_success: "修改靶機可見狀態成功！"
+    repeat: "存在重複添加的靶機，請檢查"
+    not_found: "靶機不存在！"
+    auto_refresh_flag_error: "靶機 SSH 設置為空"
+    reset_success: "重置靶機資訊成功"
+
+  team:
+    post_error: "添加隊伍失敗！"
+    put_error: "修改隊伍資訊失敗！"
+    put_success: "修改隊伍資訊成功！"
+    delete_error: "刪除隊伍失敗！"
+    delete_success: "刪除隊伍成功！"
+    login_error: "帳號或密碼錯誤！"
+    logout_success: "登出成功！"
+    repeat: "存在重複添加的隊伍，請檢查"
+    team_name_empty: "隊伍名不能為空"
+    reset_password_error: "重置密碼失敗！"
+    not_found: "隊伍不存在！"
+
+  timer:
+    total_round: "比賽總輪數：{{.round}}"
+    total_time: "比賽總時長：{{.time}}  分鐘"
+    end: "比賽已結束"
+    start_time_error: "比賽結束時間應大於開始時間！"
+    single_rest_time_error: "RestTime 單個時間週期配置錯誤！"
+    rest_time_start_error: "RestTime 配置錯誤！前一時間應在後一時間點之前。[ {{.from}} - {{.to}} ]"
+    rest_time_overflow_error: "RestTime 配置錯誤！不能在比賽開始時間之前或比賽結束時間之後。[ {{.from}} - {{.to}} ]"
+    rest_time_order_error: "RestTime 需要按開始時間順序輸入！[ {{.from}} - {{.to}} ]"
+
+  healthy:
+    previous_round_non_zero_error: "上一輪分數非零和，請檢查！"
+    total_score_non_zero_error: "總分數非零和，請檢查！"
+
+  install:
+    greet: "Cardinal.toml 設定檔不存在，安裝嚮導將帶領您進行配置。"
+    input_title: "請輸入比賽名稱"
+    begin_time: "請輸入比賽開始時間（格式 2020-02-17 12:00:00）"
+    end_time: "請輸入比賽結束時間（格式 2020-02-17 12:00:00）"
+    duration: "請輸入每輪長度（單位：分鐘，預設值：2）"
+    port: "請輸入後端伺服器埠號（預設值：19999）"
+    flag_prefix: "請輸入 Flag 首碼（預設值：hctf{）"
+    flag_suffix: "請輸入 Flag 尾碼（預設值：}）"
+    checkdown_score: "請輸入每次 Checkdown 扣分（預設值：50）"
+    attack_score: "請輸入每次攻擊得分（預設值：50）"
+    separate_frontend: "是否自行另外部署前端？(true / false，預設值：false)"
+    sentry: "發送您的統計資料，説明我們使 Cardinal 變得更好？(true / false，預設值：true)"
+    db_host: "請輸入資料庫位址（預設值：localhost:3306）"
+    db_username: "請輸入資料庫帳號："
+    db_password: "請輸入資料庫密碼："
+    db_name: "請輸入資料庫表名（預設值：cardinal）"
+    manager_name: "請輸入管理員帳號："
+    manager_password: "請輸入管理員密碼："
+    manager_success: "添加管理員帳號成功，請妥善保管您的帳號密碼資訊！"
+    create_config_success: "創建 Cardinal.toml 設定檔成功！"
+
+  manager:
+    login_error: "帳號或密碼錯誤！"
+    logout_success: "登出成功！"
+    post_error: "添加管理員帳號失敗！"
+    post_success: "添加管理員成功！"
+    delete_error: "刪除管理員失敗！"
+    delete_success: "刪除管理員成功！"
+    repeat: "管理員名稱重複"
+    update_token_fail: "更新管理員 Token 失敗！"
+    update_password_fail: "修改管理員密碼失敗！"
+    manager_required: "需要管理員許可權帳號"
+
+  log:
+    new_challenge: "新的題目 [{{.title}}] 被創建"
+    delete_challenge: "題目 [{{.title}}] 被刪除"
+    new_gamebox: "共 {{.count}} 個靶機被創建"
+    set_challenge_visible: "設置題目 [{{.challenge}}] 狀態為可見"
+    set_challenge_invisible: "設置題目 [{{.challenge}}] 狀態為不可見"
+    generate_flag: "生成 Flag 完成！共 {{.total}} 個。耗時 {{.time}} s。"
+    score_success: "第 {{.round}} 輪分數結算完成！耗時 {{.time}} s。"
+    new_manager: "新的管理員帳號 [ {{.name}} ] 被添加"
+    delete_manager: "管理員 [ ID: {{.id}} ] 已刪除"
+    manager_token: "管理員 [ ID: {{.id}} ] Token 已刷新"
+    manager_password: "管理員 [ ID: {{.id}} ] 密碼已修改"
+    new_team: "{{.count}} 個新的隊伍 [ {{.teamName}} ] 被創建"
+    delete_team: "Team [ {{.teamName}} ] 被刪除"
+    team_reset_password: "隊伍 [ {{.teamName}} ] 登錄密碼已重置"
+    rank_list_success: "更新排行榜標題成功"
+
+  misc:
+    version_out_of_date: "當前 Cardinal 並非最新版本，請考慮升級到最新版本。當前版本: {{.currentVersion}} / 最新版本: {{.latestVersion}}"
+    database_version_out_of_date: "資料庫結構已升級，請考慮清除當前資料庫中的資料並重新生成。"
+
