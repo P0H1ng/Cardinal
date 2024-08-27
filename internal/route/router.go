@@ -124,7 +124,7 @@ func Init() *gin.Engine {
 		managerRouter.GET("/gameboxes/refreshFlag", func(c *gin.Context) {
 			game.RefreshFlag()
 			// TODO: i18n
-			c.JSON(utils.MakeSuccessJSON("刷新 Flag 操作已执行，请在数据大屏查看是否有错误信息"))
+			c.JSON(utils.MakeSuccessJSON("更新 Flag 操作已執行，請在系統狀態查看是否有錯誤訊息"))
 		})
 		managerRouter.GET("/gameboxes/reset", __(game.ResetAllGameBoxes))
 

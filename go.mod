@@ -5,7 +5,7 @@ go 1.13
 require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/Microsoft/go-winio v0.4.14 // indirect
-	github.com/P0H1ng/fronted_manager v0.0.0-20240617144335-ff1d3f9a822c
+	github.com/P0H1ng/fronted_manager v0.0.0-20240729021413-925fc13a9f75
 	github.com/P0H1ng/fronted_player v0.0.0-20240617144525-5b46428465a1
 	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20200108200545-475eaeb16496 // indirect

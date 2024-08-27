@@ -60,8 +60,8 @@ func SubmitFlag(c *gin.Context) (int, interface{}) {
 	inputForm.Flag = strings.TrimSpace(inputForm.Flag)
 
 	var flagData db.Flag
-	db.MySQL.Model(&db.Flag{}).Where(&db.Flag{Flag: inputForm.Flag, Round: timer.Get().NowRound}).Find(&flagData) // 注意判断是否为本轮 Flag
-	if flagData.ID == 0 || teamID == flagData.TeamID {                                                            // 注意不允许提交自己的 flag
+	db.MySQL.Model(&db.Flag{}).Where(&db.Flag{Flag: inputForm.Flag, Round: timer.Get().NowRound}).Find(&flagData) 
+	if flagData.ID == 0 || teamID == flagData.TeamID {                                                            
 		return utils.MakeErrJSON(403, 40307,
 			locales.I18n.T(c.GetString("lang"), "flag.wrong"),
 		)
@@ -172,7 +172,7 @@ func GetFlags(c *gin.Context) (int, interface{}) {
 	}
 
 	per, err := strconv.Atoi(perStr)
-	if err != nil || per <= 0 || per >= 100 { // 限制每页最多 100 条
+	if err != nil || per <= 0 || per >= 100 { 
 		return utils.MakeErrJSON(400, 40023,
 			locales.I18n.T(c.GetString("lang"), "general.error_query"),
 		)

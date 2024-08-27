@@ -23,21 +23,21 @@ func GetDir(c *gin.Context) (int, interface{}) {
 		nowPath, err := os.Getwd()
 		basePath = nowPath
 		if err != nil {
-			return utils.MakeErrJSON(500, 50025, "获取当前目录信息失败")
+			return utils.MakeErrJSON(500, 50025, "取得當前目錄資訊失敗")
 		}
 	}
 	path := filepath.Join(basePath, folder)
 
 	f, err := os.Stat(path)
 	if err != nil {
-		return utils.MakeErrJSON(500, 50026, fmt.Sprintf("打开文件 %s 失败", path))
+		return utils.MakeErrJSON(500, 50026, fmt.Sprintf("開啟文件 %s 失敗", path))
 	}
 	if !f.IsDir() {
-		return utils.MakeErrJSON(500, 50027, fmt.Sprintf("%s 不是目录", path))
+		return utils.MakeErrJSON(500, 50027, fmt.Sprintf("%s 不是目錄", path))
 	}
 	fileInfo, err := ioutil.ReadDir(path)
 	if err != nil {
-		return utils.MakeErrJSON(500, 50026, fmt.Sprintf("打开文件 %s 失败", path))
+		return utils.MakeErrJSON(500, 50026, fmt.Sprintf("開啟文件 %s 失敗", path))
 	}
 
 	type fileItem struct {

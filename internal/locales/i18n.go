@@ -23,7 +23,7 @@ func Middleware() gin.HandlerFunc {
 		languages, _, err := language.ParseAcceptLanguage(acceptLanguages)
 		if err != nil || len(languages) == 0 {
 			// Set en-US as default language.
-			c.Set("lang", "en-US")
+			c.Set("lang", "zh-TW")
 			c.Next()
 			return
 		}

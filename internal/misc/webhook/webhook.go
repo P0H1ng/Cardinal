@@ -192,12 +192,12 @@ func Add(webHookType string, webHookData interface{}) {
 func sendWebHook(webHookType string, webHookData interface{}) {
 	webHookStore, ok := store.Get("webHook")
 	if !ok {
-		logger.New(logger.IMPORTANT, "webhook_cache", "WebHook 缓存获取失败！")
+		logger.New(logger.IMPORTANT, "webhook_cache", "WebHook 快取獲得失敗！")
 		return
 	}
 	webHooks, ok := webHookStore.([]db.WebHook)
 	if !ok {
-		logger.New(logger.IMPORTANT, "webhook_cache", "WebHook 缓存获取失败！")
+		logger.New(logger.IMPORTANT, "webhook_cache", "WebHook 快取獲得失敗！")
 		return
 	}
 
@@ -222,7 +222,7 @@ func sendWebHook(webHookType string, webHookData interface{}) {
 				resp, _, _ := req.End()
 
 				if resp == nil || resp.StatusCode != 200 {
-					logger.New(logger.IMPORTANT, "webhook_cache", "WebHook 投递失败: "+webhook.URL)
+					logger.New(logger.IMPORTANT, "webhook_cache", "WebHook 傳遞失敗: "+webhook.URL)
 				}
 			}(v)
 		}

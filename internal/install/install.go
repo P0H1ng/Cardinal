@@ -138,6 +138,7 @@ func GenerateConfigFileGuide(lang string) ([]byte, error) {
 	err := errors.New("")
 	for err != nil {
 		utils.InputString(&input.BeginTime, string(locales.I18n.T(lang, "install.begin_time")))
+		input.BeginTime = strings.ReplaceAll(input.BeginTime, "/", "-")
 		beginTime, err = time.ParseInLocation("2006-01-02 15:04:05", input.BeginTime, time.Local)
 	}
 	input.BeginTime = beginTime.Format(time.RFC3339)
@@ -146,6 +147,7 @@ func GenerateConfigFileGuide(lang string) ([]byte, error) {
 	err = errors.New("")
 	for err != nil {
 		utils.InputString(&input.EndTime, string(locales.I18n.T(lang, "install.end_time")))
+		input.EndTime = strings.ReplaceAll(input.EndTime, "/", "-")
 		endTime, err = time.ParseInLocation("2006-01-02 15:04:05 ", input.EndTime, time.Local)
 	}
 	input.EndTime = endTime.Format(time.RFC3339)
