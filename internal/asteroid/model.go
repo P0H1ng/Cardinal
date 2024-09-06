@@ -6,6 +6,7 @@ type Greet struct {
 	Time  int
 	Round int
 	Team  []Team
+	Challenge []Challenge
 }
 
 type Team struct {
@@ -16,12 +17,22 @@ type Team struct {
 	Score int
 }
 
+type Challenge struct {
+	ChallengeId    int
+	ChallengeName  string
+}
+
 type unityData struct {
 	Type string
 	Data interface{}
 }
 
 type attack struct {
+	From int
+	To   int
+}
+
+type start struct {
 	From int
 	To   int
 }

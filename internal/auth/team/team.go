@@ -81,6 +81,7 @@ func GetTeamInfo(c *gin.Context) (int, interface{}) {
 	}
 
 	return utils.MakeSuccessJSON(gin.H{
+		"Id":    teamID,
 		"Name":  teamInfo.Name,
 		"Logo":  teamInfo.Logo,
 		"Score": teamInfo.Score,

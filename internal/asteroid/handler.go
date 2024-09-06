@@ -24,6 +24,18 @@ func Attack(c *gin.Context) (int, interface{}) {
 	return utils.MakeSuccessJSON(locales.I18n.T(c.GetString("lang"), "general.success"))
 }
 
+func Start(c *gin.Context) (int, interface{}) {
+	var startData struct {
+		From int `binding:"required"`
+		To   int `binding:"required"`
+	}
+	if err := c.BindJSON(&startData); err != nil {
+		return utils.MakeErrJSON(400, 40038, locales.I18n.T(c.GetString("lang"), "general.error_payload"))
+	}
+	sendStart(startData.From, startData.To)
+	return utils.MakeSuccessJSON(locales.I18n.T(c.GetString("lang"), "general.success"))
+}
+
 func Rank(c *gin.Context) (int, interface{}) {
 	sendRank()
 	return utils.MakeSuccessJSON(locales.I18n.T(c.GetString("lang"), "general.success"))

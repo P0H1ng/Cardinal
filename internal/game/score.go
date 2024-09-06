@@ -10,6 +10,7 @@ import (
 	"github.com/P0H1ng/Cardinal/internal/healthy"
 	"github.com/P0H1ng/Cardinal/internal/locales"
 	"github.com/P0H1ng/Cardinal/internal/logger"
+	"github.com/P0H1ng/Cardinal/internal/asteroid"
 )
 
 // CalculateRoundScore will calculate the score of the given round.
@@ -19,17 +20,17 @@ func CalculateRoundScore(round int) {
 	// + Attacked score
 	addAttack(round)
 	// - Been attacked score
-	minusAttack(round)
+	// minusAttack(round)
 
 	// - Been check down
-	minusCheckDown(round)
+	// minusCheckDown(round)
 	// + Service online
-	addCheckDown(round)
+	// addCheckDown(round)
 
 	// Calculate and update all the gameboxes' score.
 	calculateGameBoxScore()
 	// Calculate and update all the teams' score.
-	calculateTeamScore()
+	// calculateTeamScore()
 
 	// Refresh the ranking list table header.
 	//s.SetRankListTitle()
@@ -78,6 +79,26 @@ func calculateTeamScore() {
 	}
 }
 
+// 更新某隊伍的總分
+func updateTeamScore(teamID uint, GameBoxID uint) {
+	var sc struct {
+		Score float64 `gorm:"Column:Score"`
+	}
+	// 計算隊伍總分
+	db.MySQL.Raw(`
+		SELECT SUM(score) as Score
+		FROM (
+			SELECT MAX(score) as score
+			FROM scores
+			WHERE team_id = ? AND deleted_at IS NULL
+			GROUP BY game_box_id
+		) as unique_scores
+	`, teamID).Scan(&sc)
+
+	// 更新隊伍的總分
+	db.MySQL.Model(&db.Team{}).Where(&db.Team{Model: gorm.Model{ID: teamID}}).Update(&db.Team{Score: sc.Score})
+}
+
 // addAttack will add scores to the attacker.
 func addAttack(round int) {
 	// Traversal all the gameboxes.
@@ -88,7 +109,7 @@ func addAttack(round int) {
 		var attackActions []db.AttackAction
 		db.MySQL.Model(&db.AttackAction{}).Where(&db.AttackAction{GameBoxID: gameBox.ID, Round: round}).Find(&attackActions)
 		if len(attackActions) != 0 {
-			score := float64(conf.Get().AttackScore) / float64(len(attackActions)) // Score which every attacker can get from this gamebox.
+			score := float64(gameBox.Score) / float64(len(attackActions)) // Score which every attacker can get from this gamebox.
 			// Add score to the attackers.
 			for _, action := range attackActions {
 				// Get the attacker's gamebox ID of this challenge.
@@ -102,9 +123,11 @@ func addAttack(round int) {
 					Reason:    "attack",
 					Score:     score,
 				})
+				updateTeamScore(action.AttackerTeamID, attackerGameBox.ID)
 			}
 		}
 	}
+	asteroid.SendRank()
 }
 
 // minusAttack will minus scores from the victim.

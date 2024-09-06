@@ -1,7 +1,6 @@
 package route
 
 import (
-	sentrygin "github.com/getsentry/sentry-go/gin"
 	"github.com/gin-contrib/cors"
 	"github.com/gin-contrib/static"
 	"github.com/gin-gonic/gin"
@@ -40,11 +39,11 @@ func Init() *gin.Engine {
 	api := r.Group("/api")
 	api.Use(locales.Middleware()) // i18n
 	// Sentry
-	if conf.Get().Sentry {
-		api.Use(sentrygin.New(sentrygin.Options{
-			Repanic: true,
-		}))
-	}
+	// if conf.Get().Sentry {
+	// 	api.Use(sentrygin.New(sentrygin.Options{
+	// 		Repanic: true,
+	// 	}))
+	// }
 
 	// Frontend
 	if !conf.Get().SeparateFrontend {
@@ -96,6 +95,7 @@ func Init() *gin.Engine {
 			c.JSON(utils.MakeSuccessJSON(gin.H{"Title": game.GetRankListTitle(), "Rank": game.GetRankList()}))
 		})
 		teamRouter.GET("/bulletins", __(bulletin.GetAllBulletins))
+		teamRouter.POST("/start", __(asteroid.Start))
 	}
 
 	// Manager login

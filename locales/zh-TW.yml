@@ -103,7 +103,6 @@ zh-TW:
     checkdown_score: "請輸入每次 Checkdown 扣分（預設值：50）"
     attack_score: "請輸入每次攻擊得分（預設值：50）"
     separate_frontend: "是否自行另外部署前端？(true / false，預設值：false)"
-    sentry: "發送您的統計資料，説明我們使 Cardinal 變得更好？(true / false，預設值：true)"
     db_host: "請輸入資料庫位址（預設值：localhost:3306）"
     db_username: "請輸入資料庫帳號："
     db_password: "請輸入資料庫密碼："

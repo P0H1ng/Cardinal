@@ -3,6 +3,7 @@ package asteroid
 const (
 	INIT      = "init"
 	ATTACK    = "attack"
+	START     = "start"
 	RANK      = "rank"
 	STATUS    = "status"
 	ROUND     = "round"
@@ -43,9 +44,26 @@ func SendAttack(from int, to int) {
 	sendAttack(from, to)
 }
 
+func SendRank() {
+	sendRank()
+}
+
 // sendAttack sends an attack action message.
 func sendAttack(from int, to int) {
 	hub.sendMessage(ATTACK, attack{
+		From: from,
+		To:   to,
+	})
+}
+
+// SendStart sends an start action message.
+func SendStart(from int, to int) {
+	sendStart(from, to)
+}
+
+// SendStart sends an start action message.
+func sendStart(from int, to int) {
+	hub.sendMessage(START, start{
 		From: from,
 		To:   to,
 	})

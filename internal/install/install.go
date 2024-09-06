@@ -26,7 +26,7 @@ const DOCKER_ENV = "CARDINAL_DOCKER"
 
 const configTemplate = `
 [base]
-SystemLanguage="zh-CN"
+SystemLanguage="zh-TW"
 BeginTime="{{ .BeginTime }}"
 RestTime=[
 #    ["2020-02-16T17:00:00+08:00","2020-02-16T18:00:00+08:00"],
@@ -157,7 +157,6 @@ func GenerateConfigFileGuide(lang string) ([]byte, error) {
 	utils.InputString(&input.CheckDownScore, string(locales.I18n.T(lang, "install.checkdown_score")))
 	utils.InputString(&input.AttackScore, string(locales.I18n.T(lang, "install.attack_score")))
 	utils.InputString(&input.SeparateFrontend, string(locales.I18n.T(lang, "install.separate_frontend")))
-	utils.InputString(&input.Sentry, string(locales.I18n.T(lang, "install.sentry")))
 	utils.InputString(&input.DBHost, string(locales.I18n.T(lang, "install.db_host")))
 	utils.InputString(&input.DBUsername, string(locales.I18n.T(lang, "install.db_username")))
 	utils.InputString(&input.DBPassword, string(locales.I18n.T(lang, "install.db_password")))

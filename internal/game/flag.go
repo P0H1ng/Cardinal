@@ -88,7 +88,7 @@ func SubmitFlag(c *gin.Context) (int, interface{}) {
 		// Animate Asteroid
 		animateAsteroid, _ := strconv.ParseBool(dynamic_config.Get(utils.ANIMATE_ASTEROID))
 		if animateAsteroid {
-			asteroid.SendAttack(int(teamID), int(flagData.TeamID))
+			asteroid.SendAttack(int(teamID), int(flagData.ChallengeID))
 		}
 
 		return utils.MakeErrJSON(403, 40309,
@@ -120,7 +120,7 @@ func SubmitFlag(c *gin.Context) (int, interface{}) {
 	// Webhook
 	go webhook.Add(webhook.SUBMIT_FLAG_HOOK, gin.H{"from": teamID, "to": gamebox.TeamID, "gamebox": gamebox.ID})
 	// Send Unity3D attack message.
-	asteroid.SendAttack(int(teamID), int(flagData.TeamID))
+	asteroid.SendAttack(int(teamID), int(flagData.ChallengeID))
 
 	// Get attack team data
 	var flagTeam db.Team
@@ -131,6 +131,8 @@ func SubmitFlag(c *gin.Context) (int, interface{}) {
 	// Live log
 	_ = livelog.Stream.Write(livelog.GlobalStream, livelog.NewLine("submit_flag",
 		gin.H{"From": t.Name, "To": flagTeam.Name, "Challenge": challenge.Title}))
+
+	CalculateRoundScore(timer.Get().NowRound);
 
 	return utils.MakeSuccessJSON(locales.I18n.T(c.GetString("lang"), "flag.submit_success"))
 }

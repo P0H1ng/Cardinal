@@ -184,12 +184,12 @@ func timerProcess() {
 
 					// Calculate scores.
 					// Get the latest score record.
-					latestScoreRound := GetLatestScoreRound()
+					// latestScoreRound := GetLatestScoreRound()
 
 					// If Cardinal has been restart by unexpected error, get the latest round score and chick if need calculate the scores of previous round.
-					if latestScoreRound < t.NowRound-1 {
-						CalculateRoundScore(t.NowRound - 1)
-					}
+					// if latestScoreRound < t.NowRound-1 {
+						// CalculateRoundScore(t.NowRound - 1)
+					// }
 
 					// Auto refresh flag
 					RefreshFlag()
@@ -209,7 +209,7 @@ func timerProcess() {
 			// Calculate the score of the last round when the competition is over.
 			if !lastRoundCalculate {
 				lastRoundCalculate = true
-				go CalculateRoundScore(t.TotalRound)
+				// go CalculateRoundScore(t.TotalRound)
 				// Game over hook
 				go webhook.Add(webhook.END_HOOK, nil)
 				logger.New(logger.IMPORTANT, "system", string(locales.I18n.T(conf.Get().SystemLanguage, "timer.end")))
