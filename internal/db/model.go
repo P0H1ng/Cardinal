@@ -64,6 +64,7 @@ type AttackAction struct {
 	ChallengeID    uint // Victim's challenge ID
 	AttackerTeamID uint // Attacker's Team ID
 	Round          int
+	SolveTime      float64
 }
 
 // Flag is a gorm model for database table `flags`.

@@ -28,7 +28,7 @@ func CalculateRoundScore(round int) {
 	// addCheckDown(round)
 
 	// Calculate and update all the gameboxes' score.
-	calculateGameBoxScore()
+	// calculateGameBoxScore()
 	// Calculate and update all the teams' score.
 	// calculateTeamScore()
 

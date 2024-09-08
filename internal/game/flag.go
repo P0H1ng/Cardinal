@@ -47,6 +47,7 @@ func SubmitFlag(c *gin.Context) (int, interface{}) {
 
 	type InputForm struct {
 		Flag string `json:"flag" binding:"required"`
+		Time float64
 	}
 	var inputForm InputForm
 	err := c.BindJSON(&inputForm)
@@ -59,13 +60,15 @@ func SubmitFlag(c *gin.Context) (int, interface{}) {
 	// Remove the space
 	inputForm.Flag = strings.TrimSpace(inputForm.Flag)
 
+
 	var flagData db.Flag
 	db.MySQL.Model(&db.Flag{}).Where(&db.Flag{Flag: inputForm.Flag, Round: timer.Get().NowRound}).Find(&flagData) 
-	if flagData.ID == 0 || teamID == flagData.TeamID {                                                            
-		return utils.MakeErrJSON(403, 40307,
-			locales.I18n.T(c.GetString("lang"), "flag.wrong"),
-		)
-	}
+	// 隊伍不可輸入自己flag
+	// if flagData.ID == 0 || teamID == flagData.TeamID {                                                            
+	// 	return utils.MakeErrJSON(403, 40307,
+	// 		locales.I18n.T(c.GetString("lang"), "flag.wrong"),
+	// 	)
+	// }
 
 	// Check the challenge is visible or not.
 	var gamebox db.GameBox
@@ -106,12 +109,14 @@ func SubmitFlag(c *gin.Context) (int, interface{}) {
 		GameBoxID:      flagData.GameBoxID,
 		AttackerTeamID: teamID,
 		ChallengeID:    flagData.ChallengeID,
-		Round:          flagData.Round,
+		Round:          flagData.Round, 
 	}).RowsAffected != 1 {
 		tx.Rollback()
 		return utils.MakeErrJSON(500, 50013,
 			locales.I18n.T(c.GetString("lang"), "flag.submit_error"),
 		)
+	} else {
+		db.MySQL.Model(&db.AttackAction{}).Where(&db.AttackAction{Model: gorm.Model{ID: flagData.GameBoxID}}).Update(&db.AttackAction{SolveTime: inputForm.Time})
 	}
 	tx.Commit()
 
@@ -130,7 +135,7 @@ func SubmitFlag(c *gin.Context) (int, interface{}) {
 	db.MySQL.Model(&db.Challenge{}).Where(&db.Challenge{Model: gorm.Model{ID: flagData.ChallengeID}}).Find(&challenge)
 	// Live log
 	_ = livelog.Stream.Write(livelog.GlobalStream, livelog.NewLine("submit_flag",
-		gin.H{"From": t.Name, "To": flagTeam.Name, "Challenge": challenge.Title}))
+		gin.H{"From": t.Name, "To": flagTeam.Name, "Challenge": challenge.Title, "Time": inputForm.Time}))
 
 	CalculateRoundScore(timer.Get().NowRound);
 
