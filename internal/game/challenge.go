@@ -10,6 +10,7 @@ import (
 	"github.com/P0H1ng/Cardinal/internal/locales"
 	"github.com/P0H1ng/Cardinal/internal/logger"
 	"github.com/P0H1ng/Cardinal/internal/utils"
+	"github.com/P0H1ng/Cardinal/internal/asteroid"
 )
 
 // SetVisible is setting challenge visible status handler.
@@ -40,11 +41,13 @@ func SetVisible(c *gin.Context) (int, interface{}) {
 	db.MySQL.Model(&db.GameBox{}).Where("challenge_id = ?", inputForm.ID).Update(map[string]interface{}{"visible": inputForm.Visible})
 
 	// Calculate all the teams' score. (Only visible challenges)
-	calculateTeamScore()
+	// calculateTeamScore()
 	// Refresh the ranking list table's header.
 	SetRankListTitle()
 	// Refresh the ranking list teams' scores.
 	SetRankList()
+	// 更新動畫題目
+	asteroid.SendVisible()
 
 	status := "invisible"
 	if inputForm.Visible {
@@ -202,7 +205,7 @@ func EditChallenge(c *gin.Context) (int, interface{}) {
 	// If the challenge's score is updated, we need to calculate the gameboxes' scores and the teams' scores.
 	if inputForm.BaseScore != checkChallenge.BaseScore {
 		// Calculate all the teams' score. (Only visible challenges)
-		calculateTeamScore()
+		// calculateTeamScore()
 		// Refresh the ranking list table's header.
 		SetRankListTitle()
 		// Refresh the ranking list teams' scores.
@@ -241,7 +244,7 @@ func DeleteChallenge(c *gin.Context) (int, interface{}) {
 	}
 
 	tx := db.MySQL.Begin()
-	// 同时删除 GameBox
+	// 同時刪除 GameBox
 	tx.Where("challenge_id = ?", uint(id)).Delete(&db.GameBox{})
 	if tx.Where("id = ?", uint(id)).Delete(&db.Challenge{}).RowsAffected != 1 {
 		tx.Rollback()

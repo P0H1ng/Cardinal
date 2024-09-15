@@ -5,8 +5,8 @@ go 1.13
 require (
 	github.com/BurntSushi/toml v0.3.1
 	github.com/Microsoft/go-winio v0.4.14 // indirect
-	github.com/P0H1ng/fronted_manager v0.0.0-20240906060739-762fef322b64
-	github.com/P0H1ng/fronted_player v0.0.0-20240906002557-fe3863f2b6d2
+	github.com/P0H1ng/fronted_manager v0.0.0-20240915145112-c529370ae3e0
+	github.com/P0H1ng/fronted_player v0.0.0-20240908144828-01d7ff243041
 	github.com/andybalholm/cascadia v1.1.0 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20200108200545-475eaeb16496 // indirect
 	github.com/aws/aws-sdk-go v1.30.20 // indirect

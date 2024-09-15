@@ -36,6 +36,11 @@ func Start(c *gin.Context) (int, interface{}) {
 	return utils.MakeSuccessJSON(locales.I18n.T(c.GetString("lang"), "general.success"))
 }
 
+func Visible(c *gin.Context) (int, interface{}) {
+	sendVisible()
+	return utils.MakeSuccessJSON(locales.I18n.T(c.GetString("lang"), "general.success"))
+}
+
 func Rank(c *gin.Context) (int, interface{}) {
 	sendRank()
 	return utils.MakeSuccessJSON(locales.I18n.T(c.GetString("lang"), "general.success"))

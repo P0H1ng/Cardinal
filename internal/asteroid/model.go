@@ -18,8 +18,13 @@ type Team struct {
 }
 
 type Challenge struct {
-	ChallengeId    int
-	ChallengeName  string
+	ChallengeId       uint
+	ChallengeName     string
+	ChallengeVisible  bool
+}
+
+type NewChallenge struct {
+	Challenge []Challenge
 }
 
 type unityData struct {

@@ -11,6 +11,7 @@ const (
 	TIME      = "time"
 	CLEAR     = "clear"
 	CLEAR_ALL = "clearAll"
+	VISIBLE   = "visible"
 )
 
 var hub *Hub
@@ -48,6 +49,10 @@ func SendRank() {
 	sendRank()
 }
 
+func SendVisible() {
+	sendVisible()
+}
+
 // sendAttack sends an attack action message.
 func sendAttack(from int, to int) {
 	hub.sendMessage(ATTACK, attack{
@@ -72,6 +77,11 @@ func sendStart(from int, to int) {
 // sendRank sends the team rank list message.
 func sendRank() {
 	hub.sendMessage(RANK, rank{Team: refresh().Team})
+}
+
+// sendVisible refresh Asteroid ChallengeLists
+func sendVisible() {
+	hub.sendMessage(VISIBLE, NewChallenge{Challenge: refresh().Challenge})
 }
 
 // sendStatus sends the teams' status message.

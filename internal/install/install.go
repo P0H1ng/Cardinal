@@ -154,9 +154,9 @@ func GenerateConfigFileGuide(lang string) ([]byte, error) {
 
 	utils.InputString(&input.Duration, string(locales.I18n.T(lang, "install.duration")))
 	utils.InputString(&input.Port, string(locales.I18n.T(lang, "install.port")))
-	utils.InputString(&input.CheckDownScore, string(locales.I18n.T(lang, "install.checkdown_score")))
-	utils.InputString(&input.AttackScore, string(locales.I18n.T(lang, "install.attack_score")))
-	utils.InputString(&input.SeparateFrontend, string(locales.I18n.T(lang, "install.separate_frontend")))
+	// utils.InputString(&input.CheckDownScore, string(locales.I18n.T(lang, "install.checkdown_score")))
+	// utils.InputString(&input.AttackScore, string(locales.I18n.T(lang, "install.attack_score")))
+	// utils.InputString(&input.SeparateFrontend, string(locales.I18n.T(lang, "install.separate_frontend")))
 	utils.InputString(&input.DBHost, string(locales.I18n.T(lang, "install.db_host")))
 	utils.InputString(&input.DBUsername, string(locales.I18n.T(lang, "install.db_username")))
 	utils.InputString(&input.DBPassword, string(locales.I18n.T(lang, "install.db_password")))

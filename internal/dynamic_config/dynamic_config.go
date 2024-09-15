@@ -12,7 +12,7 @@ func Init() {
 	db.MySQL.Model(&db.DynamicConfig{})
 
 	initConfig(utils.DATBASE_VERSION, db.VERSION, utils.STRING)
-	initConfig(utils.TITLE_CONF, "CTF", utils.STRING)
+	initConfig(utils.TITLE_CONF, "網安搶旗暨攻防模訓平臺", utils.STRING)
 	initConfig(utils.FLAG_PREFIX_CONF, "ctf{", utils.STRING)
 	initConfig(utils.FLAG_SUFFIX_CONF, "}", utils.STRING)
 	initConfig(utils.ANIMATE_ASTEROID, utils.BOOLEAN_FALSE, utils.BOOLEAN)
